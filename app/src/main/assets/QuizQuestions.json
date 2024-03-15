@@ -1,0 +1,54 @@
+{
+  "QuizQuestions": [
+    {
+      "Title": "What keyword is used to indicate the start of a method in Java?",
+      "Options": ["begin", "method", "start", "public"],
+      "CorrectAnswer": "public"
+    },
+    {
+      "Title": "Which of the following is used to read input from the user in Java?",
+      "Options": ["System.print()", "Scanner", "Console", "BufferedReader"],
+      "CorrectAnswer": "Scanner"
+    },
+    {
+      "Title": "How do you declare a constant variable in Java?",
+      "Options": ["final", "const", "static", "let"],
+      "CorrectAnswer": "final"
+    },
+    {
+      "Title": "Which loop is suitable when the number of iterations is known?",
+      "Options": ["for loop", "while loop", "do-while loop", "foreach loop"],
+      "CorrectAnswer": "for loop"
+    },
+    {
+      "Title": "What does JVM stand for?",
+      "Options": ["Java Virtual Machine", "Java Very Much", "Java Verification Mechanism", "Java Version Manager"],
+      "CorrectAnswer": "Java Virtual Machine"
+    },
+    {
+      "Title": "Which keyword is used to inherit a class in Java?",
+      "Options": ["extends", "inherits", "implements", "inheritsFrom"],
+      "CorrectAnswer": "extends"
+    },
+    {
+      "Title": "What is the correct way to comment multiple lines in Java?",
+      "Options": ["// comment", "# comment", "/* comment */", "<!-- comment -->"],
+      "CorrectAnswer": "/* comment */"
+    },
+    {
+      "Title": "What does the 'static' keyword mean in Java?",
+      "Options": ["It makes a variable constant.", "It indicates that the variable is of dynamic type.", "It indicates that a method or variable belongs to the class, not instances.", "It specifies a variable to be of floating-point type."],
+      "CorrectAnswer": "It indicates that a method or variable belongs to the class, not instances."
+    },
+    {
+      "Title": "Which data type is used to store decimal numbers with single precision in Java?",
+      "Options": ["int", "float", "double", "decimal"],
+      "CorrectAnswer": "float"
+    },
+    {
+      "Title": "What does the 'new' keyword do in Java?",
+      "Options": ["It creates a new instance of a class.", "It indicates that a method is new.", "It is used to declare a new variable.", "It is used to indicate a conditional statement."],
+      "CorrectAnswer": "It creates a new instance of a class."
+    }
+  ]
+}
