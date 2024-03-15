@@ -16,13 +16,14 @@ public class Question {
         WRONG
     }
     public String title;
-    public ArrayList<String> wrongAnswers;
+    public ArrayList<String> answerOptions;
     public String correctAnswer;
 
+    public String selectedAnswer;
     public QuestionState guess;
 
     public Question(JSONObject data){
-        wrongAnswers = new ArrayList<>();
+        answerOptions = new ArrayList<>();
 
 //         TODO: ideally i dont wanna be doing any json work in here
         try{
@@ -31,10 +32,10 @@ public class Question {
             correctAnswer = data.getString("CorrectAnswer");
 
             for(int i = 0; i<options.length();i++){
-                if(options.getString(i).equals(correctAnswer)){
-                    continue; // dont add correct answer to wrongAnswers array
-                }
-                wrongAnswers.add(options.getString(i));
+//                if(options.getString(i).equals(correctAnswer)){
+//                    continue; // dont add correct answer to wrongAnswers array
+//                }
+                answerOptions.add(options.getString(i));
             }
         }catch(JSONException e){
             e.printStackTrace();
@@ -42,6 +43,13 @@ public class Question {
 
         guess = QuestionState.UNANSWERED;
 
+    }
+
+    public Boolean isAnswerCorrect(){
+        if(!selectedAnswer.isEmpty() && selectedAnswer.equals(correctAnswer)){
+            return true;
+        }
+        return false;
     }
 
 }

@@ -13,6 +13,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class QuizActivity extends AppCompatActivity {
 
     public Quiz quiz;
@@ -25,7 +28,12 @@ public class QuizActivity extends AppCompatActivity {
     public Button btnOption2;
     public Button btnOption3;
     public Button btnOption4;
+    public Button btnSubmit;
 
+
+    public Question activeQuestion;
+    public Button selectedButton;
+    public Button correctAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,32 +56,115 @@ public class QuizActivity extends AppCompatActivity {
         tvQuizName.setText(quizName);
 
 
-        Quiz newQuiz = new Quiz(this, "QuizQuestions.json");
+        quiz = new Quiz(this, "QuizQuestions.json");
         tvTitle = findViewById(R.id.questionTitle);
         btnOption1 = findViewById(R.id.questionOption1);
         btnOption2 = findViewById(R.id.questionOption2);
         btnOption3 = findViewById(R.id.questionOption3);
         btnOption4 = findViewById(R.id.questionOption4);
+        btnSubmit = findViewById(R.id.quizNextQuestion);
 
-        int index = 0;
-        tvTitle.setText(newQuiz.questions.get(index).title);
-        btnOption1.setText(newQuiz.questions.get(index).wrongAnswers.get(0));
-        btnOption2.setText(newQuiz.questions.get(index).wrongAnswers.get(1));
-        btnOption3.setText(newQuiz.questions.get(index).wrongAnswers.get(2));
-        btnOption4.setText(newQuiz.questions.get(index).correctAnswer);
+        setQuestion(0);
 
         View.OnClickListener onOptionSelect = v -> {
-            resetButtonColors();
+            if(activeQuestion.guess != Question.QuestionState.UNANSWERED){
+                // already answered
+                return;
+            }
 
+            resetButtonColors();
+            selectedButton = (Button)v;
             ((Button)v).setTextColor(Color.parseColor("#E3EDF4"));
             v.setBackgroundColor(Color.parseColor("#214E71"));
+
+            btnSubmit.setBackgroundColor(Color.parseColor("#005597"));
+            btnSubmit.setTextColor(Color.parseColor("#FFFFFF"));
+
+            // not ideal
+            activeQuestion.selectedAnswer = ((Button)v).getText().toString();
         };
+
+        btnSubmit.setOnClickListener(v->{
+            if(activeQuestion.guess != Question.QuestionState.UNANSWERED){
+                int nextQuestionIndex = quiz.questions.indexOf(activeQuestion)+1;
+                if(nextQuestionIndex > 0 && nextQuestionIndex < quiz.questions.size()){
+                    // set new question
+//                    activeQuestion = quiz.questions.get(nextQuestionIndex);
+                    setQuestion(nextQuestionIndex);
+                }else{
+                    // assume end of the quiz, show results page
+                }
+                return;
+            }
+
+            if(activeQuestion.selectedAnswer.isEmpty()){
+                // TODO: toast "Please choose an answer"
+                return;
+            }
+
+            resetButtonColors();
+            highlightCorrectButton();
+
+            if(!activeQuestion.isAnswerCorrect()){
+                highlightSelectedWrongButton();
+                activeQuestion.guess = Question.QuestionState.WRONG;
+            }else{
+                activeQuestion.guess = Question.QuestionState.CORRECT;
+            }
+
+            btnSubmit.setText("NEXT QUESTION");
+            btnSubmit.setBackgroundColor(Color.parseColor("#005597"));
+            btnSubmit.setTextColor(Color.parseColor("#FFFFFF"));
+
+        });
 
         btnOption1.setOnClickListener(onOptionSelect);
         btnOption2.setOnClickListener(onOptionSelect);
         btnOption3.setOnClickListener(onOptionSelect);
         btnOption4.setOnClickListener(onOptionSelect);
 
+
+    }
+
+    public void setQuestion(int index){
+        activeQuestion = quiz.questions.get(index);
+
+        ArrayList<String> questions = new ArrayList<>();
+
+
+        for(String question : activeQuestion.answerOptions){
+            questions.add(question);
+        }
+        Collections.shuffle(questions);
+        Collections.shuffle(questions);
+        Collections.shuffle(questions);
+
+        int correctIndex = questions.indexOf(activeQuestion.correctAnswer);
+
+
+        if(questions.size() < 4){
+            // error;
+            return;
+        }
+
+        // randomise list
+
+        tvTitle.setText(activeQuestion.title);
+
+        btnOption1.setText(questions.remove(0));
+        btnOption2.setText(questions.remove(0));
+        btnOption3.setText(questions.remove(0));
+        btnOption4.setText(questions.remove(0));
+
+        //TODO: put btnOption's in an array
+        switch(correctIndex+1){
+            case 1: correctAnswer = btnOption1;break;
+            case 2: correctAnswer = btnOption2;break;
+            case 3: correctAnswer = btnOption3;break;
+            case 4: correctAnswer = btnOption4;break;
+        }
+
+        resetButtonColors();
 
     }
 
@@ -86,5 +177,18 @@ public class QuizActivity extends AppCompatActivity {
         btnOption2.setTextColor(Color.parseColor("#214E71"));
         btnOption3.setTextColor(Color.parseColor("#214E71"));
         btnOption4.setTextColor(Color.parseColor("#214E71"));
+
+        // Disabled color
+        btnSubmit.setBackgroundColor(Color.parseColor("#7b858c"));
+        btnSubmit.setTextColor(Color.parseColor("#3f454a"));
+    }
+
+    public void highlightCorrectButton(){
+        // green
+        correctAnswer.setBackgroundColor(Color.parseColor("#00ff51"));
+    }
+    public void highlightSelectedWrongButton(){
+        //red
+        selectedButton.setBackgroundColor(Color.parseColor("#cf2200"));
     }
 }
