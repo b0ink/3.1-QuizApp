@@ -124,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:backgroundTint="#214E71"
+                android:backgroundTint="#005597"
                 android:text="SUBMIT"
                 android:textColor="#FFFFFF"
                 app:cornerRadius="6dp" />
