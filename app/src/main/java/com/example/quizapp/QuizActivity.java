@@ -1,5 +1,6 @@
 package com.example.quizapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -12,6 +13,10 @@ import androidx.core.view.WindowInsetsCompat;
 public class QuizActivity extends AppCompatActivity {
 
     public Quiz quiz;
+
+    public TextView tvName;
+    public TextView tvQuizName;
+
     public TextView tvTitle;
     public TextView tvOption1;
     public TextView tvOption2;
@@ -29,6 +34,16 @@ public class QuizActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        tvName = findViewById(R.id.name);
+        tvQuizName = findViewById(R.id.quizName);
+
+        Intent intent = getIntent();
+        String name = intent.getStringExtra(MainActivity.EXTRA_NAME);
+        String quizName = intent.getStringExtra(MainActivity.EXTRA_QUIZ_NAME);
+        tvName.setText(name);
+        tvQuizName.setText(quizName);
+
 
         Quiz newQuiz = new Quiz(this, "QuizQuestions.json");
         tvTitle = findViewById(R.id.questionTitle);

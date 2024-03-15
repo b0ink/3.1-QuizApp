@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:height="50dp"
@@ -34,7 +34,7 @@
             android:textAlignment="center" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/startQuiz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
