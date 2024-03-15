@@ -5,63 +5,115 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#367CB2"
     tools:context=".QuizActivity">
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:backgroundTint="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="25dp">
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/quizName"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
-    </LinearLayout>
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Welcome, name!"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/questionTitle"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/quizName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="QUESTION" />
+            android:layout_marginBottom="25dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/questionOption1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Option1" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="1/5"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
 
-        <TextView
-            android:id="@+id/questionOption2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Option2" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:indeterminateBehavior="repeat"
+                android:max="5"
+                android:progress="1"
+                android:progressBackgroundTint="#214E71"
+                android:progressTint="#01FF88" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/questionOption3"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Option3" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/questionOption4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Option4" />
+            <TextView
+                android:id="@+id/questionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="@font/lato_bold"
+                android:text="Which loop is suitable when the number of iterations is known?"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/questionOption1"
+                style="@style/quizButtonOption"
+                android:backgroundTint="#E3EDF4"
+                android:text="do-while loop"
+                android:textColor="#214E71"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/questionOption2"
+                style="@style/quizButtonOption"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/questionOption3"
+                style="@style/quizButtonOption"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/questionOption4"
+                style="@style/quizButtonOption"
+                android:text="Button" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

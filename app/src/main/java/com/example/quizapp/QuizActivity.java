@@ -41,7 +41,7 @@ public class QuizActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra(MainActivity.EXTRA_NAME);
         String quizName = intent.getStringExtra(MainActivity.EXTRA_QUIZ_NAME);
-        tvName.setText(name);
+        tvName.setText("Welcome, " + name + "!");
         tvQuizName.setText(quizName);
 
 
