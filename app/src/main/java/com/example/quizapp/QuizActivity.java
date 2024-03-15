@@ -1,7 +1,10 @@
 package com.example.quizapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -18,10 +21,10 @@ public class QuizActivity extends AppCompatActivity {
     public TextView tvQuizName;
 
     public TextView tvTitle;
-    public TextView tvOption1;
-    public TextView tvOption2;
-    public TextView tvOption3;
-    public TextView tvOption4;
+    public Button btnOption1;
+    public Button btnOption2;
+    public Button btnOption3;
+    public Button btnOption4;
 
 
     @Override
@@ -47,16 +50,41 @@ public class QuizActivity extends AppCompatActivity {
 
         Quiz newQuiz = new Quiz(this, "QuizQuestions.json");
         tvTitle = findViewById(R.id.questionTitle);
-        tvOption1 = findViewById(R.id.questionOption1);
-        tvOption2 = findViewById(R.id.questionOption2);
-        tvOption3 = findViewById(R.id.questionOption3);
-        tvOption4 = findViewById(R.id.questionOption4);
+        btnOption1 = findViewById(R.id.questionOption1);
+        btnOption2 = findViewById(R.id.questionOption2);
+        btnOption3 = findViewById(R.id.questionOption3);
+        btnOption4 = findViewById(R.id.questionOption4);
 
         int index = 0;
         tvTitle.setText(newQuiz.questions.get(index).title);
-        tvOption1.setText(newQuiz.questions.get(index).wrongAnswers.get(0));
-        tvOption2.setText(newQuiz.questions.get(index).wrongAnswers.get(1));
-        tvOption3.setText(newQuiz.questions.get(index).wrongAnswers.get(2));
-        tvOption4.setText(newQuiz.questions.get(index).correctAnswer);
+        btnOption1.setText(newQuiz.questions.get(index).wrongAnswers.get(0));
+        btnOption2.setText(newQuiz.questions.get(index).wrongAnswers.get(1));
+        btnOption3.setText(newQuiz.questions.get(index).wrongAnswers.get(2));
+        btnOption4.setText(newQuiz.questions.get(index).correctAnswer);
+
+        View.OnClickListener onOptionSelect = v -> {
+            resetButtonColors();
+
+            ((Button)v).setTextColor(Color.parseColor("#E3EDF4"));
+            v.setBackgroundColor(Color.parseColor("#214E71"));
+        };
+
+        btnOption1.setOnClickListener(onOptionSelect);
+        btnOption2.setOnClickListener(onOptionSelect);
+        btnOption3.setOnClickListener(onOptionSelect);
+        btnOption4.setOnClickListener(onOptionSelect);
+
+
+    }
+
+    public void resetButtonColors(){
+        btnOption1.setBackgroundColor(Color.parseColor("#E3EDF4"));
+        btnOption2.setBackgroundColor(Color.parseColor("#E3EDF4"));
+        btnOption3.setBackgroundColor(Color.parseColor("#E3EDF4"));
+        btnOption4.setBackgroundColor(Color.parseColor("#E3EDF4"));
+        btnOption1.setTextColor(Color.parseColor("#214E71"));
+        btnOption2.setTextColor(Color.parseColor("#214E71"));
+        btnOption3.setTextColor(Color.parseColor("#214E71"));
+        btnOption4.setTextColor(Color.parseColor("#214E71"));
     }
 }
