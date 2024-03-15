@@ -39,6 +39,11 @@ public class QuizActivity extends AppCompatActivity {
     public Button selectedButton;
     public Button correctAnswer;
 
+    public static final String EXTRA_TOTAL_QUESTIONS = "total_questions";
+    public static final String EXTRA_CORRECT_QUESTIONS = "correct_questions";
+    public static final String EXTRA_WRONG_QUESTIONS = "wrong_questions";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +96,14 @@ public class QuizActivity extends AppCompatActivity {
         };
 
         btnSubmit.setOnClickListener(v->{
-
+            if(((Button)v).getText().equals("SEE RESULTS")){
+                Intent resultsIntent = new Intent(QuizActivity.this, ResultsActivity.class);
+                resultsIntent.putExtra(EXTRA_TOTAL_QUESTIONS, quiz.GetTotalQuestions());
+                resultsIntent.putExtra(EXTRA_WRONG_QUESTIONS, quiz.GetQuestionsWithState(Question.QuestionState.WRONG, false));
+                resultsIntent.putExtra(EXTRA_CORRECT_QUESTIONS, quiz.GetQuestionsWithState(Question.QuestionState.CORRECT, false));
+                startActivity(resultsIntent);
+                return;
+            }
 
             if(activeQuestion.guess != Question.QuestionState.UNANSWERED){
                 int nextQuestionIndex = quiz.questions.indexOf(activeQuestion)+1;
