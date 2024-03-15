@@ -12,11 +12,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    public TextView tvTitle;
-    public TextView tvOption1;
-    public TextView tvOption2;
-    public TextView tvOption3;
-    public TextView tvOption4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,19 +24,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Quiz newQuiz = new Quiz(this, "QuizQuestions.json");
-        tvTitle = findViewById(R.id.questionTitle);
-        tvOption1 = findViewById(R.id.questionOption1);
-        tvOption2 = findViewById(R.id.questionOption2);
-        tvOption3 = findViewById(R.id.questionOption3);
-        tvOption4 = findViewById(R.id.questionOption4);
 
-        int index = 0;
-        tvTitle.setText(newQuiz.questions.get(index).title);
-        tvOption1.setText(newQuiz.questions.get(index).wrongAnswers.get(0));
-        tvOption2.setText(newQuiz.questions.get(index).wrongAnswers.get(1));
-        tvOption3.setText(newQuiz.questions.get(index).wrongAnswers.get(2));
-        tvOption4.setText(newQuiz.questions.get(index).correctAnswer);
     }
 }
 
