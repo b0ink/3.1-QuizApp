@@ -26,6 +26,7 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:text="Welcome, name!"
@@ -44,13 +45,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
                 android:padding="5dp"
                 android:text="1/5"
                 android:textAlignment="center"
@@ -90,28 +91,43 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/questionOption1"
+                android:id="@+id/questionOption2"
                 style="@style/quizButtonOption"
                 android:backgroundTint="#E3EDF4"
-                android:text="do-while loop"
+                android:text="Button"
                 android:textColor="#214E71"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:cornerRadius="6dp" />
 
             <Button
                 android:id="@+id/questionOption2"
                 style="@style/quizButtonOption"
-                android:text="Button" />
+                android:text="Button"
+                app:cornerRadius="6dp" />
 
             <Button
                 android:id="@+id/questionOption3"
                 style="@style/quizButtonOption"
-                android:text="Button" />
+                android:text="Button"
+                app:cornerRadius="6dp" />
 
             <Button
                 android:id="@+id/questionOption4"
                 style="@style/quizButtonOption"
-                android:text="Button" />
+                android:text="Button"
+                app:cornerRadius="6dp" />
+
+            <Button
+                android:id="@+id/quizNextQuestion"
+                style="@style/quizButtonOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="#214E71"
+                android:text="SUBMIT"
+                android:textColor="#FFFFFF"
+                app:cornerRadius="6dp" />
 
         </LinearLayout>
     </LinearLayout>
