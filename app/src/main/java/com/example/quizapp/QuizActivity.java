@@ -80,10 +80,10 @@ public class QuizActivity extends AppCompatActivity {
 
             resetButtonColors();
             selectedButton = (Button)v;
-            ((Button)v).setTextColor(Color.parseColor("#E3EDF4"));
-            v.setBackgroundColor(Color.parseColor("#214E71"));
+            ((Button)v).setTextColor(Color.parseColor("#FFFFFF"));
+            v.setBackgroundColor(Color.parseColor("#145f99"));
 
-            btnSubmit.setBackgroundColor(Color.parseColor("#005597"));
+            btnSubmit.setBackgroundColor(Color.parseColor("#145f99"));
             btnSubmit.setTextColor(Color.parseColor("#FFFFFF"));
 
             // not ideal
@@ -91,6 +91,8 @@ public class QuizActivity extends AppCompatActivity {
         };
 
         btnSubmit.setOnClickListener(v->{
+
+
             if(activeQuestion.guess != Question.QuestionState.UNANSWERED){
                 int nextQuestionIndex = quiz.questions.indexOf(activeQuestion)+1;
                 if(nextQuestionIndex > 0 && nextQuestionIndex < quiz.questions.size()){
@@ -101,6 +103,10 @@ public class QuizActivity extends AppCompatActivity {
                     // assume end of the quiz, show results page
                     btnSubmit.setText("SEE RESULTS");
                 }
+                return;
+            }
+
+            if(selectedButton == null){
                 return;
             }
 
@@ -122,7 +128,7 @@ public class QuizActivity extends AppCompatActivity {
 
 
             btnSubmit.setText("NEXT QUESTION");
-            btnSubmit.setBackgroundColor(Color.parseColor("#005597"));
+            btnSubmit.setBackgroundColor(Color.parseColor("#145f99"));
             btnSubmit.setTextColor(Color.parseColor("#FFFFFF"));
 
         });
@@ -177,6 +183,8 @@ public class QuizActivity extends AppCompatActivity {
             case 4: correctAnswer = btnOption4;break;
         }
 
+        selectedButton = null;
+
         resetButtonColors();
 
     }
@@ -192,8 +200,9 @@ public class QuizActivity extends AppCompatActivity {
         btnOption4.setTextColor(Color.parseColor("#214E71"));
 
         // Disabled color
-        btnSubmit.setBackgroundColor(Color.parseColor("#7b858c"));
-        btnSubmit.setTextColor(Color.parseColor("#3f454a"));
+
+        btnSubmit.setBackgroundColor(Color.parseColor("#636b70"));
+        btnSubmit.setTextColor(Color.parseColor("#2a2f33"));
     }
 
     public void highlightCorrectButton(){
@@ -203,5 +212,6 @@ public class QuizActivity extends AppCompatActivity {
     public void highlightSelectedWrongButton(){
         //red
         selectedButton.setBackgroundColor(Color.parseColor("#cf2200"));
+        selectedButton.setTextColor(Color.parseColor("#FFFFFF"));
     }
 }
