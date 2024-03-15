@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             Intent intent = new Intent(MainActivity.this, QuizActivity.class);
-//            doConversion(true)
             intent.putExtra(EXTRA_NAME, name);
             intent.putExtra(EXTRA_QUIZ_NAME, quizName);
             startActivity(intent);
