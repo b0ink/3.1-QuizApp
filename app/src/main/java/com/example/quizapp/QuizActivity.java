@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -29,6 +30,9 @@ public class QuizActivity extends AppCompatActivity {
     public Button btnOption3;
     public Button btnOption4;
     public Button btnSubmit;
+
+    public ProgressBar pbProgress;
+    public TextView tvQuestionsAnswered;
 
 
     public Question activeQuestion;
@@ -63,6 +67,8 @@ public class QuizActivity extends AppCompatActivity {
         btnOption3 = findViewById(R.id.questionOption3);
         btnOption4 = findViewById(R.id.questionOption4);
         btnSubmit = findViewById(R.id.quizNextQuestion);
+        tvQuestionsAnswered = findViewById(R.id.questionsAnswered);
+        pbProgress = findViewById(R.id.progressBar);
 
         setQuestion(0);
 
@@ -93,6 +99,7 @@ public class QuizActivity extends AppCompatActivity {
                     setQuestion(nextQuestionIndex);
                 }else{
                     // assume end of the quiz, show results page
+                    btnSubmit.setText("SEE RESULTS");
                 }
                 return;
             }
@@ -111,6 +118,8 @@ public class QuizActivity extends AppCompatActivity {
             }else{
                 activeQuestion.guess = Question.QuestionState.CORRECT;
             }
+            pbProgress.setProgress(pbProgress.getProgress()+1);
+
 
             btnSubmit.setText("NEXT QUESTION");
             btnSubmit.setBackgroundColor(Color.parseColor("#005597"));
@@ -127,8 +136,12 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void setQuestion(int index){
-        activeQuestion = quiz.questions.get(index);
 
+        activeQuestion = quiz.questions.get(index);
+        pbProgress.setProgress(index);
+        pbProgress.setMax(quiz.questions.size());
+        tvQuestionsAnswered.setText(index+1 + "/" + quiz.GetTotalQuestions());
+        btnSubmit.setText("SUBMIT");
         ArrayList<String> questions = new ArrayList<>();
 
 
