@@ -31,6 +31,29 @@ public class Quiz {
         }
     }
 
+
+    public int GetTotalQuestions(){
+        return questions.size();
+
+    }
+
+    /**
+     *
+     * @param state match questions containing this state
+     * @param isNotEqual if true, match questions that does not equal `state` param
+     * @return Integer number of questions that match param conditions
+     */
+    public int GetQuestionsWithState(Question.QuestionState state, Boolean isNotEqual){
+        int count = 0;
+        for(Question q : questions){
+            if((q.guess == state && !isNotEqual) || (q.guess != state && isNotEqual)){
+                count ++;
+            }
+        }
+        return count;
+    }
+
+
     public void generateQuestions(String topic){
 
     }

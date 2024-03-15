@@ -10,6 +10,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class QuizActivity extends AppCompatActivity {
 
+    public Quiz quiz;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
