@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import android.os.Handler;
 
 public class ResultsActivity extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class ResultsActivity extends AppCompatActivity {
 
     private Handler handler = new Handler();
     int pStatus = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,18 +35,18 @@ public class ResultsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String name = intent.getStringExtra(MainActivity.EXTRA_NAME);
-        int totalQuestions  = intent.getIntExtra(QuizActivity.EXTRA_TOTAL_QUESTIONS, -1);
-        int wrongQuestions  = intent.getIntExtra(QuizActivity.EXTRA_WRONG_QUESTIONS, -1);
-        int correctQuestions  = intent.getIntExtra(QuizActivity.EXTRA_CORRECT_QUESTIONS, -1);
+        int totalQuestions = intent.getIntExtra(QuizActivity.EXTRA_TOTAL_QUESTIONS, -1);
+        int wrongQuestions = intent.getIntExtra(QuizActivity.EXTRA_WRONG_QUESTIONS, -1);
+        int correctQuestions = intent.getIntExtra(QuizActivity.EXTRA_CORRECT_QUESTIONS, -1);
 
         tvTitle = findViewById(R.id.title_name);
-        tvTitle.setText("Congratulations,\n"+name+"!");
+        tvTitle.setText("Congratulations,\n" + name + "!");
 
         tvResults = findViewById(R.id.results_percentage);
         pbResults = findViewById(R.id.resultsProgressBar);
 
 
-        int actualResults = (int)(((double)correctQuestions/(double)totalQuestions) * 100.0);
+        int actualResults = (int) (((double) correctQuestions / (double) totalQuestions) * 100.0);
         pbResults.setProgress(0);
         pbResults.setMax(100);
         tvResults.setText("");
@@ -58,7 +60,7 @@ public class ResultsActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                
+
                 while (pStatus < actualResults) {
                     pStatus += 1;
                     handler.post(new Runnable() {
