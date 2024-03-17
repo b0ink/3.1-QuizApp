@@ -122,7 +122,7 @@ public class QuizActivity extends AppCompatActivity {
                 if(debug){
                     resultsIntent.putExtra(EXTRA_TOTAL_QUESTIONS, 10);
                     resultsIntent.putExtra(EXTRA_WRONG_QUESTIONS, 1);
-                    resultsIntent.putExtra(EXTRA_CORRECT_QUESTIONS, 4);
+                    resultsIntent.putExtra(EXTRA_CORRECT_QUESTIONS, 9);
                 }else{
                     resultsIntent.putExtra(EXTRA_TOTAL_QUESTIONS, quiz.GetTotalQuestions());
                     resultsIntent.putExtra(EXTRA_WRONG_QUESTIONS, quiz.GetQuestionsWithState(Question.QuestionState.WRONG, false));
