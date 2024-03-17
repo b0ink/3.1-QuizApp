@@ -106,6 +106,7 @@ public class QuizActivity extends AppCompatActivity {
             ((Button)v).setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_selected));
             ((Button)v).setTextColor(ContextCompat.getColor(this, R.color.button_text_selected));
 
+            btnSubmit.setEnabled(true);
             btnSubmit.setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_submit));
             btnSubmit.setTextColor(ContextCompat.getColor(this, R.color.button_text_submit));
 
@@ -171,6 +172,7 @@ public class QuizActivity extends AppCompatActivity {
 
 
             //TODO: make highlightSubmitButton() etc
+            btnSubmit.setEnabled(true);
             btnSubmit.setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_submit));
             btnSubmit.setTextColor(ContextCompat.getColor(this, R.color.button_text_submit));
 
@@ -228,6 +230,7 @@ public class QuizActivity extends AppCompatActivity {
             btnOption.setTextColor(ContextCompat.getColor(this, R.color.button_text_default));
         }
         // Disabled color
+        btnSubmit.setEnabled(false);
         btnSubmit.setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_disabled));
         btnSubmit.setTextColor(ContextCompat.getColor(this, R.color.button_text_disabled));
     }
