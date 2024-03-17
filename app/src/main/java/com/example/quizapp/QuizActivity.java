@@ -237,7 +237,7 @@ public class QuizActivity extends AppCompatActivity {
     }
     public void highlightSelectedWrongButton(){
         //red
-        correctAnswer.setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_wrong));
-        correctAnswer.setTextColor(ContextCompat.getColor(this, R.color.button_text_wrong));
+        selectedButton.setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_wrong));
+        selectedButton.setTextColor(ContextCompat.getColor(this, R.color.button_text_wrong));
     }
 }
