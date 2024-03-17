@@ -128,7 +128,7 @@ public class QuizActivity extends AppCompatActivity {
                     resultsIntent.putExtra(EXTRA_WRONG_QUESTIONS, quiz.GetQuestionsWithState(Question.QuestionState.WRONG, false));
                     resultsIntent.putExtra(EXTRA_CORRECT_QUESTIONS, quiz.GetQuestionsWithState(Question.QuestionState.CORRECT, false));
                 }
-
+                finish();
                 startActivity(resultsIntent);
                 return;
             }

@@ -2,6 +2,7 @@ package com.example.quizapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -18,6 +19,9 @@ public class ResultsActivity extends AppCompatActivity {
     public TextView tvResults;
     public TextView tvTitle;
     public ProgressBar pbResults;
+
+    public Button btnNewQuiz;
+    public Button btnFinish;
 
     private Handler handler = new Handler();
     int pStatus = 0;
@@ -45,6 +49,16 @@ public class ResultsActivity extends AppCompatActivity {
         tvResults = findViewById(R.id.results_percentage);
         pbResults = findViewById(R.id.resultsProgressBar);
 
+        btnNewQuiz = findViewById(R.id.button_new_quiz);
+        btnFinish = findViewById(R.id.button_finish);
+
+        btnNewQuiz.setOnClickListener(v -> {
+            finish();
+        });
+
+        btnFinish.setOnClickListener(v -> {
+            finish();
+        });
 
         int actualResults = (int) (((double) correctQuestions / (double) totalQuestions) * 100.0);
         pbResults.setProgress(0);
