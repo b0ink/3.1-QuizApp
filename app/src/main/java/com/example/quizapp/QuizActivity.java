@@ -47,6 +47,15 @@ public class QuizActivity extends AppCompatActivity {
     public static final String EXTRA_WRONG_QUESTIONS = "wrong_questions";
 
 
+    public QuizState currentState;
+
+    public enum QuizState{
+        NONE,
+        WAITING_FOR_SUBMIT,
+        WAITING_FOR_NEXT_QUESTION,
+        WAITING_FOR_RESULTS
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +115,7 @@ public class QuizActivity extends AppCompatActivity {
         };
 
         btnSubmit.setOnClickListener(v->{
-            if(((Button)v).getText().equals("SEE RESULTS")){
+            if(currentState == QuizState.WAITING_FOR_RESULTS){
                 Intent resultsIntent = new Intent(QuizActivity.this, ResultsActivity.class);
                 resultsIntent.putExtra(EXTRA_TOTAL_QUESTIONS, quiz.GetTotalQuestions());
                 resultsIntent.putExtra(EXTRA_WRONG_QUESTIONS, quiz.GetQuestionsWithState(Question.QuestionState.WRONG, false));
@@ -115,24 +124,17 @@ public class QuizActivity extends AppCompatActivity {
                 return;
             }
 
-            if(activeQuestion.guess != Question.QuestionState.UNANSWERED){
+            if(currentState == QuizState.WAITING_FOR_NEXT_QUESTION){
                 int nextQuestionIndex = quiz.questions.indexOf(activeQuestion)+1;
                 if(nextQuestionIndex > 0 && nextQuestionIndex < quiz.questions.size()){
                     // set new question
-//                    activeQuestion = quiz.questions.get(nextQuestionIndex);
                     setQuestion(nextQuestionIndex);
-                }else{
-                    // assume end of the quiz, show results page
-                    btnSubmit.setText("SEE RESULTS");
                 }
                 return;
             }
 
-            if(selectedButton == null){
-                return;
-            }
-
-            if(activeQuestion.selectedAnswer.isEmpty()){
+            // waiting for answer selection
+            if(selectedButton == null || activeQuestion.selectedAnswer.isEmpty()){
                 // TODO: toast "Please choose an answer"
                 return;
             }
@@ -146,19 +148,22 @@ public class QuizActivity extends AppCompatActivity {
             }else{
                 activeQuestion.guess = Question.QuestionState.CORRECT;
             }
+
             pbProgress.setProgress(pbProgress.getProgress()+1);
 
 
-            btnSubmit.setText("NEXT QUESTION");
             if(quiz.questions.indexOf(activeQuestion)+1 == quiz.questions.size()){
                 btnSubmit.setText("SEE RESULTS");
+                currentState = QuizState.WAITING_FOR_RESULTS;
+            }else{
+                btnSubmit.setText("NEXT QUESTION");
+                currentState = QuizState.WAITING_FOR_NEXT_QUESTION;
             }
 
 
             //TODO: make highlightSubmitButton() etc
             btnSubmit.setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_submit));
             btnSubmit.setTextColor(ContextCompat.getColor(this, R.color.button_text_submit));
-
 
         });
 
@@ -169,6 +174,8 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void setQuestion(int index){
+        currentState = QuizState.WAITING_FOR_SUBMIT;
+
         activeQuestion = quiz.questions.get(index);
 
         pbProgress.setProgress(index);
