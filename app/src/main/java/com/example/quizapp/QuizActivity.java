@@ -113,7 +113,7 @@ public class QuizActivity extends AppCompatActivity {
             // not ideal
             activeQuestion.selectedAnswer = ((Button)v).getText().toString();
         };
-        Boolean debug = true;
+        Boolean debug = false;
 
         btnSubmit.setOnClickListener(v->{
             if(currentState == QuizState.WAITING_FOR_RESULTS || debug){
