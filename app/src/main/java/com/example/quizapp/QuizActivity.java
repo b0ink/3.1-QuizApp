@@ -140,6 +140,10 @@ public class QuizActivity extends AppCompatActivity {
 
 
             btnSubmit.setText("NEXT QUESTION");
+            if(quiz.questions.indexOf(activeQuestion)+1 == quiz.questions.size()){
+                btnSubmit.setText("SEE RESULTS");
+            }
+
             btnSubmit.setBackgroundColor(Color.parseColor("#145f99"));
             btnSubmit.setTextColor(Color.parseColor("#FFFFFF"));
 
