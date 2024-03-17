@@ -53,18 +53,21 @@ public class ResultsActivity extends AppCompatActivity {
         btnNewQuiz = findViewById(R.id.button_new_quiz);
         btnFinish = findViewById(R.id.button_finish);
 
-        btnNewQuiz.setOnClickListener(v -> {
-            finish();
-        });
-
-        btnFinish.setOnClickListener(v -> {
-            finish();
-        });
 
         int actualResults = (int) (((double) correctQuestions / (double) totalQuestions) * 100.0);
         pbResults.setProgress(0);
         pbResults.setMax(100);
         tvResults.setText("");
+
+        btnNewQuiz.setOnClickListener(v -> {
+            if (pStatus < actualResults) return;
+            finish();
+        });
+
+        btnFinish.setOnClickListener(v -> {
+            if (pStatus < actualResults) return;
+            finish();
+        });
 
 //        https://stackoverflow.com/questions/21333866/how-to-create-a-circular-progressbar-in-android-which-rotates-on-it
         new Thread(new Runnable() {
@@ -76,13 +79,13 @@ public class ResultsActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                double msDelay = 1500.0 / (double)actualResults;
+                double msDelay = 1500.0 / (double) actualResults;
 
                 while (pStatus < actualResults) {
                     pStatus += 1;
-                    if(pStatus% Math.floor(((1.0/((double)totalQuestions)) * 100)) == 0){
+                    if (pStatus % Math.floor(((1.0 / ((double) totalQuestions)) * 100)) == 0) {
                         pCount++;
-                        if(pCount > correctQuestions){
+                        if (pCount > correctQuestions) {
                             pCount = correctQuestions;
                         }
                     }
@@ -91,11 +94,11 @@ public class ResultsActivity extends AppCompatActivity {
                         public void run() {
                             pbResults.setProgress(pStatus);
 //                            tvResults.setText(pStatus + "%");
-                            tvResults.setText(pCount + "/"+totalQuestions);
+                            tvResults.setText(pCount + "/" + totalQuestions);
                         }
                     });
                     try {
-                        Thread.sleep((int)msDelay);
+                        Thread.sleep((int) msDelay);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
