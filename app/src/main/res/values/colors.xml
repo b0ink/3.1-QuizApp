@@ -2,4 +2,25 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--  multiple choice buttons  -->
+    <color name="button_background_default">#E3EDF4</color>
+    <color name="button_text_default">#214E71</color>
+
+    <color name="button_background_disabled">#636b70</color>
+    <color name="button_text_disabled">#2a2f33</color>
+
+    <color name="button_background_correct">#00ff51</color>
+    <color name="button_text_correct">#214E71</color>
+    <color name="button_background_wrong">#cf2200</color>
+    <color name="button_text_wrong">#FFFFFF</color>
+
+    <color name="button_background_submit">#145f99</color>
+    <color name="button_text_submit">#FFFFFF</color>
+
+
+    <color name="button_background_selected">#145f99</color>
+    <color name="button_text_selected">#FFFFFF</color>
+
+
 </resources>

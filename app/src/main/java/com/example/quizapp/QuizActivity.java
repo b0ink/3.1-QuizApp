@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import androidx.core.content.ContextCompat;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -29,6 +30,8 @@ public class QuizActivity extends AppCompatActivity {
     public Button btnOption2;
     public Button btnOption3;
     public Button btnOption4;
+
+    public Button[] btnOptions;
     public Button btnSubmit;
 
     public ProgressBar pbProgress;
@@ -64,13 +67,18 @@ public class QuizActivity extends AppCompatActivity {
         tvName.setText("Welcome, " + name + "!");
         tvQuizName.setText(quizName);
 
-
+        btnOptions = new Button[4];
         quiz = new Quiz(this, "QuizQuestions.json");
         tvTitle = findViewById(R.id.questionTitle);
         btnOption1 = findViewById(R.id.questionOption1);
         btnOption2 = findViewById(R.id.questionOption2);
         btnOption3 = findViewById(R.id.questionOption3);
         btnOption4 = findViewById(R.id.questionOption4);
+        btnOptions[0] = btnOption1;
+        btnOptions[1] = btnOption2;
+        btnOptions[2] = btnOption3;
+        btnOptions[3] = btnOption4;
+
         btnSubmit = findViewById(R.id.quizNextQuestion);
         tvQuestionsAnswered = findViewById(R.id.questionsAnswered);
         pbProgress = findViewById(R.id.progressBar);
@@ -85,11 +93,13 @@ public class QuizActivity extends AppCompatActivity {
 
             resetButtonColors();
             selectedButton = (Button)v;
-            ((Button)v).setTextColor(Color.parseColor("#FFFFFF"));
-            v.setBackgroundColor(Color.parseColor("#145f99"));
 
-            btnSubmit.setBackgroundColor(Color.parseColor("#145f99"));
-            btnSubmit.setTextColor(Color.parseColor("#FFFFFF"));
+            ((Button)v).setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_selected));
+            ((Button)v).setTextColor(ContextCompat.getColor(this, R.color.button_text_selected));
+
+            btnSubmit.setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_submit));
+            btnSubmit.setTextColor(ContextCompat.getColor(this, R.color.button_text_submit));
+
 
             // not ideal
             activeQuestion.selectedAnswer = ((Button)v).getText().toString();
@@ -144,10 +154,14 @@ public class QuizActivity extends AppCompatActivity {
                 btnSubmit.setText("SEE RESULTS");
             }
 
-            btnSubmit.setBackgroundColor(Color.parseColor("#145f99"));
-            btnSubmit.setTextColor(Color.parseColor("#FFFFFF"));
+
+            //TODO: make highlightSubmitButton() etc
+            btnSubmit.setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_submit));
+            btnSubmit.setTextColor(ContextCompat.getColor(this, R.color.button_text_submit));
+
 
         });
+
 
         btnOption1.setOnClickListener(onOptionSelect);
         btnOption2.setOnClickListener(onOptionSelect);
@@ -206,28 +220,24 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void resetButtonColors(){
-        btnOption1.setBackgroundColor(Color.parseColor("#E3EDF4"));
-        btnOption2.setBackgroundColor(Color.parseColor("#E3EDF4"));
-        btnOption3.setBackgroundColor(Color.parseColor("#E3EDF4"));
-        btnOption4.setBackgroundColor(Color.parseColor("#E3EDF4"));
-        btnOption1.setTextColor(Color.parseColor("#214E71"));
-        btnOption2.setTextColor(Color.parseColor("#214E71"));
-        btnOption3.setTextColor(Color.parseColor("#214E71"));
-        btnOption4.setTextColor(Color.parseColor("#214E71"));
-
+        for (Button btnOption : btnOptions) {
+            btnOption.setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_default));
+            btnOption.setTextColor(ContextCompat.getColor(this, R.color.button_text_default));
+        }
         // Disabled color
-
-        btnSubmit.setBackgroundColor(Color.parseColor("#636b70"));
-        btnSubmit.setTextColor(Color.parseColor("#2a2f33"));
+        btnSubmit.setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_disabled));
+        btnSubmit.setTextColor(ContextCompat.getColor(this, R.color.button_text_disabled));
     }
+
 
     public void highlightCorrectButton(){
         // green
-        correctAnswer.setBackgroundColor(Color.parseColor("#00ff51"));
+        correctAnswer.setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_correct));
+        correctAnswer.setTextColor(ContextCompat.getColor(this, R.color.button_text_correct));
     }
     public void highlightSelectedWrongButton(){
         //red
-        selectedButton.setBackgroundColor(Color.parseColor("#cf2200"));
-        selectedButton.setTextColor(Color.parseColor("#FFFFFF"));
+        correctAnswer.setBackgroundColor(ContextCompat.getColor(this, R.color.button_background_wrong));
+        correctAnswer.setTextColor(ContextCompat.getColor(this, R.color.button_text_wrong));
     }
 }
