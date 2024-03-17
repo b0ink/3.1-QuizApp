@@ -25,6 +25,7 @@ public class ResultsActivity extends AppCompatActivity {
 
     private Handler handler = new Handler();
     int pStatus = 0;
+    int pCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +78,18 @@ public class ResultsActivity extends AppCompatActivity {
 
                 while (pStatus < actualResults) {
                     pStatus += 1;
+                    if(pStatus% Math.floor(((1.0/((double)totalQuestions)) * 100)) == 0){
+                        pCount++;
+                        if(pCount > correctQuestions){
+                            pCount = correctQuestions;
+                        }
+                    }
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
                             pbResults.setProgress(pStatus);
-                            tvResults.setText(pStatus + "%");
+//                            tvResults.setText(pStatus + "%");
+                            tvResults.setText(pCount + "/"+totalQuestions);
                         }
                     });
                     try {

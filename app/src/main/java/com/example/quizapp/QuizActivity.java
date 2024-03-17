@@ -121,9 +121,9 @@ public class QuizActivity extends AppCompatActivity {
                 Intent resultsIntent = new Intent(QuizActivity.this, ResultsActivity.class);
                 resultsIntent.putExtra(MainActivity.EXTRA_NAME, name);
                 if(debug){
-                    resultsIntent.putExtra(EXTRA_TOTAL_QUESTIONS, 10);
+                    resultsIntent.putExtra(EXTRA_TOTAL_QUESTIONS, 33);
                     resultsIntent.putExtra(EXTRA_WRONG_QUESTIONS, 1);
-                    resultsIntent.putExtra(EXTRA_CORRECT_QUESTIONS, 9);
+                    resultsIntent.putExtra(EXTRA_CORRECT_QUESTIONS, 27);
                 }else{
                     resultsIntent.putExtra(EXTRA_TOTAL_QUESTIONS, quiz.GetTotalQuestions());
                     resultsIntent.putExtra(EXTRA_WRONG_QUESTIONS, quiz.GetQuestionsWithState(Question.QuestionState.WRONG, false));
