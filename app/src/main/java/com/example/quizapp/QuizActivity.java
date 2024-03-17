@@ -113,13 +113,22 @@ public class QuizActivity extends AppCompatActivity {
             // not ideal
             activeQuestion.selectedAnswer = ((Button)v).getText().toString();
         };
+        Boolean debug = true;
 
         btnSubmit.setOnClickListener(v->{
-            if(currentState == QuizState.WAITING_FOR_RESULTS){
+            if(currentState == QuizState.WAITING_FOR_RESULTS || debug){
                 Intent resultsIntent = new Intent(QuizActivity.this, ResultsActivity.class);
-                resultsIntent.putExtra(EXTRA_TOTAL_QUESTIONS, quiz.GetTotalQuestions());
-                resultsIntent.putExtra(EXTRA_WRONG_QUESTIONS, quiz.GetQuestionsWithState(Question.QuestionState.WRONG, false));
-                resultsIntent.putExtra(EXTRA_CORRECT_QUESTIONS, quiz.GetQuestionsWithState(Question.QuestionState.CORRECT, false));
+                resultsIntent.putExtra(MainActivity.EXTRA_NAME, name);
+                if(debug){
+                    resultsIntent.putExtra(EXTRA_TOTAL_QUESTIONS, 10);
+                    resultsIntent.putExtra(EXTRA_WRONG_QUESTIONS, 1);
+                    resultsIntent.putExtra(EXTRA_CORRECT_QUESTIONS, 4);
+                }else{
+                    resultsIntent.putExtra(EXTRA_TOTAL_QUESTIONS, quiz.GetTotalQuestions());
+                    resultsIntent.putExtra(EXTRA_WRONG_QUESTIONS, quiz.GetQuestionsWithState(Question.QuestionState.WRONG, false));
+                    resultsIntent.putExtra(EXTRA_CORRECT_QUESTIONS, quiz.GetQuestionsWithState(Question.QuestionState.CORRECT, false));
+                }
+
                 startActivity(resultsIntent);
                 return;
             }

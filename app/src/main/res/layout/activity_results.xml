@@ -5,9 +5,96 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="25dp"
     tools:context=".ResultsActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="51dp">
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/lato_bold"
+            android:text="Congratulations,\nanonymous!"
+            android:textAlignment="center"
+            android:textSize="23sp" />
+
+        <ProgressBar
+            android:id="@+id/resultsProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/circle_shape"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="50"
+            android:progressDrawable="@drawable/custom_progressbar_drawable"
+
+            />
+
+        <TextView
+            android:id="@+id/results_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/lato_bold"
+            android:gravity="center"
+            android:text="50%"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="75dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_new_quiz"
+                style="@style/quizButtonOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="0dp"
+                android:backgroundTint="#145f99"
+                android:text="NEW QUIZ"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                app:cornerRadius="6dp" />
+
+            <Button
+                android:id="@+id/button_finish"
+                style="@style/quizButtonOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="0dp"
+                android:backgroundTint="#145f99"
+                android:text="FINISH"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                app:cornerRadius="6dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="409dp"
         android:layout_height="867dp"
         android:layout_marginStart="1dp"
@@ -17,13 +104,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/result"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="23sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
