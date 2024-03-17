@@ -76,7 +76,7 @@ public class ResultsActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                double msDelay = 2000.0 / (double)actualResults;
+                double msDelay = 1500.0 / (double)actualResults;
 
                 while (pStatus < actualResults) {
                     pStatus += 1;
