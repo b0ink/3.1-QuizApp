@@ -15,6 +15,7 @@ import android.os.Handler;
 public class ResultsActivity extends AppCompatActivity {
 
     public TextView tvResults;
+    public TextView tvTitle;
     public ProgressBar pbResults;
 
     private Handler handler = new Handler();
@@ -31,9 +32,13 @@ public class ResultsActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
+        String name = intent.getStringExtra(MainActivity.EXTRA_NAME);
         int totalQuestions  = intent.getIntExtra(QuizActivity.EXTRA_TOTAL_QUESTIONS, -1);
         int wrongQuestions  = intent.getIntExtra(QuizActivity.EXTRA_WRONG_QUESTIONS, -1);
         int correctQuestions  = intent.getIntExtra(QuizActivity.EXTRA_CORRECT_QUESTIONS, -1);
+
+        tvTitle = findViewById(R.id.title_name);
+        tvTitle.setText("Congratulations,\n"+name+"!");
 
         tvResults = findViewById(R.id.results_percentage);
         pbResults = findViewById(R.id.resultsProgressBar);
@@ -49,13 +54,11 @@ public class ResultsActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    // Sleep for 200 millisecondsz
-                    // Just to display the progress slowly
-                    Thread.sleep(1000); //thread will take approx 1.5 seconds to finish
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                // TODO Auto-generated method stub
+                
                 while (pStatus < actualResults) {
                     pStatus += 1;
                     handler.post(new Runnable() {
