@@ -76,6 +76,8 @@ public class ResultsActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                double msDelay = 2000.0 / (double)actualResults;
+
                 while (pStatus < actualResults) {
                     pStatus += 1;
                     if(pStatus% Math.floor(((1.0/((double)totalQuestions)) * 100)) == 0){
@@ -93,7 +95,7 @@ public class ResultsActivity extends AppCompatActivity {
                         }
                     });
                     try {
-                        Thread.sleep(15);
+                        Thread.sleep((int)msDelay);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
