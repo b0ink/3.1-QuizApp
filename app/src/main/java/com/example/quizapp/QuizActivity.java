@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -145,7 +146,7 @@ public class QuizActivity extends AppCompatActivity {
 
             // waiting for answer selection
             if(selectedButton == null || activeQuestion.selectedAnswer.isEmpty()){
-                // TODO: toast "Please choose an answer"
+                Toast.makeText(QuizActivity.this, "Please select an answer", Toast.LENGTH_SHORT).show();
                 return;
             }
 
