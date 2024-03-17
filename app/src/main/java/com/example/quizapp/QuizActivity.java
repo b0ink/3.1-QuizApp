@@ -162,61 +162,48 @@ public class QuizActivity extends AppCompatActivity {
 
         });
 
-
-        btnOption1.setOnClickListener(onOptionSelect);
-        btnOption2.setOnClickListener(onOptionSelect);
-        btnOption3.setOnClickListener(onOptionSelect);
-        btnOption4.setOnClickListener(onOptionSelect);
-
+        for (Button btnOption : btnOptions) {
+            btnOption.setOnClickListener(onOptionSelect);
+        }
 
     }
 
     public void setQuestion(int index){
-
         activeQuestion = quiz.questions.get(index);
+
         pbProgress.setProgress(index);
         pbProgress.setMax(quiz.questions.size());
+
         tvQuestionsAnswered.setText(index+1 + "/" + quiz.GetTotalQuestions());
         btnSubmit.setText("SUBMIT");
+
         ArrayList<String> questions = new ArrayList<>();
-
-
         for(String question : activeQuestion.answerOptions){
             questions.add(question);
         }
+
+        // randomise ordering of questions
         Collections.shuffle(questions);
         Collections.shuffle(questions);
         Collections.shuffle(questions);
 
         int correctIndex = questions.indexOf(activeQuestion.correctAnswer);
 
-
         if(questions.size() < 4){
             // error;
             return;
         }
 
-        // randomise list
-
         tvTitle.setText(activeQuestion.title);
 
-        btnOption1.setText(questions.remove(0));
-        btnOption2.setText(questions.remove(0));
-        btnOption3.setText(questions.remove(0));
-        btnOption4.setText(questions.remove(0));
-
-        //TODO: put btnOption's in an array
-        switch(correctIndex+1){
-            case 1: correctAnswer = btnOption1;break;
-            case 2: correctAnswer = btnOption2;break;
-            case 3: correctAnswer = btnOption3;break;
-            case 4: correctAnswer = btnOption4;break;
+        for (Button btnOption : btnOptions) {
+            btnOption.setText(questions.remove(0));
         }
 
+        correctAnswer = btnOptions[correctIndex];
         selectedButton = null;
 
         resetButtonColors();
-
     }
 
     public void resetButtonColors(){
