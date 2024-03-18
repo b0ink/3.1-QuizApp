@@ -57,7 +57,9 @@ public class ResultsActivity extends AppCompatActivity {
         int actualResults = (int) (((double) correctQuestions / (double) totalQuestions) * 100.0);
         pbResults.setProgress(0);
         pbResults.setMax(100);
-        tvResults.setText("");
+
+//        tvResults.setText("");
+        tvResults.setText("0/" + totalQuestions);
 
         btnNewQuiz.setOnClickListener(v -> {
             if (pStatus < actualResults) return;
