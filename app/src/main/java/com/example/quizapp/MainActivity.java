@@ -33,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         etName = findViewById(R.id.name);
+
+        // Check for an existing user returning from the results activity
+        Intent resultsIntent = getIntent();
+        if(resultsIntent != null){
+            String name = resultsIntent.getStringExtra(MainActivity.EXTRA_NAME);
+            etName.setText(name);
+        }
+
         btnStartQuiz = findViewById(R.id.startQuiz);
         btnStartQuiz.setOnClickListener(v -> {
             String name = etName.getText().toString();
@@ -46,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_NAME, name);
             intent.putExtra(EXTRA_QUIZ_NAME, quizName);
             startActivity(intent);
+            finish();
         });
 
     }

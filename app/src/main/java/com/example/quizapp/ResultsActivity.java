@@ -63,11 +63,15 @@ public class ResultsActivity extends AppCompatActivity {
 
         btnNewQuiz.setOnClickListener(v -> {
             if (pStatus < actualResults) return;
+            Intent mainIntent = new Intent(ResultsActivity.this, MainActivity.class);
+            mainIntent.putExtra(MainActivity.EXTRA_NAME, name);
             finish();
+            startActivity(mainIntent);
         });
 
         btnFinish.setOnClickListener(v -> {
             if (pStatus < actualResults) return;
+            System.exit(0);
             finish();
         });
 
