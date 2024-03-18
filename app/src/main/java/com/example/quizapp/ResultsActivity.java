@@ -23,7 +23,7 @@ public class ResultsActivity extends AppCompatActivity {
     public Button btnNewQuiz;
     public Button btnFinish;
 
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
     int pStatus = 0;
     int pCount = 0;
 
@@ -41,7 +41,7 @@ public class ResultsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra(MainActivity.EXTRA_NAME);
         int totalQuestions = intent.getIntExtra(QuizActivity.EXTRA_TOTAL_QUESTIONS, -1);
-        int wrongQuestions = intent.getIntExtra(QuizActivity.EXTRA_WRONG_QUESTIONS, -1);
+//        int wrongQuestions = intent.getIntExtra(QuizActivity.EXTRA_WRONG_QUESTIONS, -1);
         int correctQuestions = intent.getIntExtra(QuizActivity.EXTRA_CORRECT_QUESTIONS, -1);
 
         tvTitle = findViewById(R.id.title_name);
@@ -76,38 +76,32 @@ public class ResultsActivity extends AppCompatActivity {
         });
 
 //        https://stackoverflow.com/questions/21333866/how-to-create-a-circular-progressbar-in-android-which-rotates-on-it
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            double msDelay = 1500.0 / (double) actualResults;
+
+            while (pStatus < actualResults) {
+                pStatus += 1;
+                if (pStatus % Math.floor(((1.0 / ((double) totalQuestions)) * 100)) == 0) {
+                    pCount++;
+                    if (pCount > correctQuestions) {
+                        pCount = correctQuestions;
+                    }
+                }
+                handler.post(() -> {
+                    pbResults.setProgress(pStatus);
+//                            tvResults.setText(pStatus + "%");
+                    tvResults.setText(pCount + "/" + totalQuestions);
+                });
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep((int) msDelay);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
-
-                double msDelay = 1500.0 / (double) actualResults;
-
-                while (pStatus < actualResults) {
-                    pStatus += 1;
-                    if (pStatus % Math.floor(((1.0 / ((double) totalQuestions)) * 100)) == 0) {
-                        pCount++;
-                        if (pCount > correctQuestions) {
-                            pCount = correctQuestions;
-                        }
-                    }
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            pbResults.setProgress(pStatus);
-//                            tvResults.setText(pStatus + "%");
-                            tvResults.setText(pCount + "/" + totalQuestions);
-                        }
-                    });
-                    try {
-                        Thread.sleep((int) msDelay);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 }
             }
         }).start();
